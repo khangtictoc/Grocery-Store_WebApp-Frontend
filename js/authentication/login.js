@@ -19,7 +19,9 @@ function submitLogin(event){
         }
     })
     .then(data => {
-        localStorage.setItem('userData', JSON.stringify(data));
+        var dataJson = JSON.parse(JSON.stringify(data));
+        localStorage.setItem(dataJson.data[0].type, dataJson.data[0].value);
+        localStorage.setItem(dataJson.data[1].type,dataJson.data[1].value);
         window.location.href = 'index.html';
     })
     .catch(error => console.error('Error:', error));
