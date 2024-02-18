@@ -13,7 +13,7 @@ $(document).ready(function(){
 for(let i =1; i<3;i++)
 {
     $.ajax({
-        url: "http://localhost:9092/product/getByCategory",
+        url: "http://localhost:9099/product/getByCategory",
         data:'categoryId='+i,
         method: "get",
         

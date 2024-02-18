@@ -152,7 +152,7 @@
             }
         }).done(function(data){
             var listProduct =data.data
-            //console.log(listProduct);
+            console.log(listProduct);
             
             var html=`<div class="w3ls_w3l_banner_nav_right_grid1">
             <h6>${categoryName01}</h6>`
@@ -212,11 +212,11 @@
             method: "get",
             data: {
                 idCategory : 2,
-                topNumber : 4   
+                topNumber : 4
             }
         }).done(function(data){
             var listProduct =data.data
-            //console.log(listProduct);
+            console.log(listProduct);
             
             var html=`<div class="w3ls_w3l_banner_nav_right_grid1">
             <h6>${categoryName02}</h6>`

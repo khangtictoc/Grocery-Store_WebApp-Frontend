@@ -25,7 +25,7 @@ function userLogout(){
     myHeaders.append("Authorization" , "Bearer " + getCookie("accessToken"));
 
     // Send request
-    fetch('http://localhost:9092/user/logout', {
+    fetch('http://localhost:9099/user/logout', {
         method: 'POST',
         mode: 'no-cors',
         headers: {

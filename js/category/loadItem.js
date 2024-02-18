@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $.ajax({
-        url: "http://localhost:9092/category/getall",
+        url: "http://localhost:9099/category/getall",
         method: "GET",
         crossDomain: true
     }).done(function(response){
