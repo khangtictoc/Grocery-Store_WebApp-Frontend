@@ -1,3 +1,4 @@
 {
-    "liveServer.settings.multiRootWorkspaceName": "Grocery-Store_WebApp-Frontend"
+    "liveServer.settings.multiRootWorkspaceName": "Grocery-Store_WebApp-Frontend",
+    "liveServer.settings.port": 5502
 }

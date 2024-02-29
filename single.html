@@ -65,13 +65,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</form>
 		</div>
 		<div class="product_list_header">  
-			<form action="#" method="post" class="last">
+			<input type="submit" href="/checkout.html" onclick="location.href='checkout.html';" name="submit" value="View your cart" class="button" />
+			<!-- <form action="#" method="get" class="last">
                 <fieldset>
                     <input type="hidden" name="cmd" value="_cart" />
                     <input type="hidden" name="display" value="1" />
-                    <input type="submit" name="submit" value="View your cart" class="button" />
+                    <input type="submit" href="/checkout.html" name="submit" value="View your cart" class="button" />
                 </fieldset>
-            </form>
+            </form> -->
 		</div>
 		<div class="w3l_header_right">
 			<ul>
@@ -207,7 +208,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<h3>Best Deals For New Products<span class="blink_me"></span></h3>
 			</div>
 			<div class="agileinfo_single">
-				<div id="product_detail"></div>
+				<div id="sanpham_chitiet"></div>
 				<!-- <h5>charminar pulao basmati rice 5 kg</h5>
 				<div class="col-md-4 agileinfo_single_left">
 					<img id="example" src="images/76.png" alt=" " class="img-responsive" />
@@ -264,8 +265,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //banner -->
 <!-- brands -->
 	<div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_popular">
+		
 		<div class="container">
 			<h3 id="sanpham_bestseller" >Popular Brands</h3>
+			<div id="#list-category2">
+			</div>
+			<div id="list-category">
+			</div>
 			<div id="list-cat"></div>
 				    <!-- <div class="w3ls_w3l_banner_nav_right_grid1">
 					<h6>food</h6>
@@ -855,6 +861,6 @@ $(document).ready(function(){
 
 	<!-- Custom script -->
 	<script src="js/category/loadItem.js"></script>
-	<script src="js/product/single.js"></script>
+	<script src="js/single.js"></script>
 </body>
 </html>

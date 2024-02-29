@@ -86,9 +86,9 @@
             method: "get",
         }).done(function(data){
             var product = data.data;
-            var returnHtml = `<h5>${product.productName} ${product.productUnit}</h5>
+            var returnHtml = `<h5>${product.name} ${product.unit}</h5>
             <div class="col-md-4 agileinfo_single_left">
-                <img id="example" src="${product.productImage}" alt=" " class="img-responsive" />
+                <img id="example" src="${product.image}" alt=" " class="img-responsive" />
             </div>
             <div class="col-md-8 agileinfo_single_right">
                 <div class="rating1">
@@ -107,11 +107,11 @@
                 </div>
                 <div class="w3agile_description">
                     <h4>Description :</h4>
-                    <p>${product.productDescription}</p>
+                    <p>${product.description}</p>
                 </div>
                 <div class="snipcart-item block">
                     <div class="snipcart-thumb agileinfo_single_right_snipcart">
-                        <h4>${product.productPrice} VNĐ<span> 25000 VNĐ</span></h4>
+                        <h4>${(Math.round(product.price * 100) / 100).toFixed(2)} VNĐ<span>  ${(Math.round(product.originalPrice * 100) / 100).toFixed(2)}</span></h4>
                     </div>
                     <div class="snipcart-details agileinfo_single_right_details">
                         <form action="#" method="get">
@@ -134,7 +134,7 @@
             <div class="clearfix"> </div>`
 
           $('#sanpham_chitiet').append(returnHtml);
-          
+          console.log("server tra ve ", data.data);
         });
 
         var categoryName01 = "FOOD";
@@ -171,9 +171,9 @@
                         <figure>
                             <div class="snipcart-item block">
                                 <div class="snipcart-thumb">
-                                    <a href="http://127.0.0.1:5500/single.html?id=${element.productId}"><img src="${element.productImage}" alt=" " class="img-responsive" /></a>
-                                    <p>${element.productName} (${element.productUnit})</p>
-                                    <h4>${element.productPrice} VNĐ<span>50000 VNĐ</span></h4>
+                                    <a href="http://127.0.0.1:5502/single.html?id=${element.id}"><img src="${element.image}" alt=" " class="img-responsive" /></a>
+                                    <p>${element.name} (${element.unit})</p>
+                                    <h4>${element.price} VNĐ<span>50000 VNĐ</span></h4>
                                 </div>
                                 <div class="snipcart-details">
                                     <form action="#" method="get">  
@@ -235,7 +235,7 @@
                         <figure>
                             <div class="snipcart-item block">
                                 <div class="snipcart-thumb">
-                                    <a href="http://127.0.0.1:5500/single.html?id=${element.productId}"><img src="${element.productImage}" alt=" " class="img-responsive" /></a>
+                                    <a href="http://127.0.0.1:5502/single.html?id=${element.productId}"><img src="${element.productImage}" alt=" " class="img-responsive" /></a>
                                     <p>${element.productName} (${element.productUnit})</p>
                                     <h4>${element.productPrice} VNĐ<span>50000 VNĐ</span></h4>
                                 </div>
@@ -299,7 +299,7 @@
                         <figure>
                             <div class="snipcart-item block">
                                 <div class="snipcart-thumb">
-                                    <a href="http://127.0.0.1:5500/single.html?id=${element.productId}"><img src="${element.productImage}" alt=" " class="img-responsive" /></a>
+                                    <a href="http://127.0.0.1:5502/single.html?id=${element.productId}"><img src="${element.productImage}" alt=" " class="img-responsive" /></a>
                                     <p>${element.productName} (${element.productUnit})</p>
                                     <h4>${element.productPrice} VNĐ<span>50000 VNĐ</span></h4>
                                 </div>
@@ -335,6 +335,99 @@
         });
         
 
+        
+         {
+            //test
+            function apiCat() {
+                return $.ajax({
+                    url: "http://localhost:9099/category/getallOrderBySold", //getting the api 
+                    type: 'get',
+                    success: function(data) {
+                        console.log(data.result)
+                    }
+                });
+            }
+            
+            function apiProduct(id) {
+                return  $.ajax({
+                    url: "http://localhost:9099/product/getByCategory", //getting the api
+                    data:'categoryId='+id,
+                    type: 'get',
+                    success: function(data) {
+            
+                    }
+                });
+            }
+            
+            $.when(apiCat()).done(function(category_data) {
+                var listCategory = category_data.data
+                for(let i=0;i<3;i++){
+                apiProduct(listCategory[i].id).done(function(product_data){
+                    console.log("server tra ve ", category_data.data)
+                    console.log("server tra ve ", product_data.data)
+                    var listProduct = product_data.data
+                    var html=''
+        
+                    html+=`<div class="w3ls_w3l_banner_nav_right_grid1">
+                    <h6>${listCategory[i].categoryName}</h6>`
+                    
+                    for(let k =0; k<listProduct.length;k++)
+                        {
+                            var jsonProduct = JSON.stringify(listProduct[k])
+                            html+=`<div class="col-md-3 w3ls_w3l_banner_left">
+                            <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+                                    <img src="images/offer.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                            <a href="http://127.0.0.1:5502/single.html?id=${listProduct[k].id}"><img src="http://localhost:9099/file/${listProduct[k].image}" alt=" " class="img-responsive" /></a>
+                                                <p> ${listProduct[k].name +" "+listProduct[k].unit}</p>
+                                                <h4>$${(Math.round(listProduct[k].price * 100) / 100).toFixed(2)} <span>$${(Math.round(listProduct[k].originalPrice * 100) / 100).toFixed(2)}</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="knorr instant soup" />
+                                                        <input type="hidden" name="amount" value="3.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="button" name="submit" value="Add to cart" class="btn-cart button" json-data='${jsonProduct}' />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        `
+                        }
+                    html+=
+                    `            <div class="clearfix"> </div>
+                </div>`
+                    
+                
+                $('#list-category').append(html)
+                console.log("server tra ve ", category_data.data)
+                console.log("server tra ve ", product_data.data)
+                })
+            }
+            });
+            //test 2
+            
+            
+            
+        }
         $("body").on("click",".btn-cart",function(){
             var dataJson = $(this).attr("json-data") // Ở đây là chuỗi
             var getObject = JSON.parse(dataJson)
@@ -365,10 +458,10 @@
                 var flag = false;
                 // check product is exist
                 for(var i=0;i<resultCart.length; i++ ){
-                    var productName = resultCart[i][0].productName;
-                    console.log("check product name "+productName)
-                    console.log("check json-data name "+getObject.productName)
-                    if (productName==getObject.productName){
+                    var productId = resultCart[i][0].id;
+                    console.log("check product name "+productId)
+                    console.log("check json-data name "+getObject.productId)
+                    if (productId==getObject.id){
                         resultCart[i][1] = resultCart[i][1]+1;
                         flag=true;
                     }

@@ -193,6 +193,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											
 									</div>
 								</div>
+								<form method="GET" action="index.html" onsubmit="return submitForm(this);">
+									<input type="submit" class="pay" value="PAY NOW" >
+								</form>
+								
                 </div>
                 <div>
                     <form action="#" method="post" class="creditly-card-form agileinfo_form">
@@ -308,9 +312,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //payment -->
 		</div>
 		<div class="clearfix"></div>
+
 	</div>
 <!-- //banner -->
-
 
 <!-- newsletter -->
 	<div class="newsletter">
@@ -392,6 +396,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="clearfix"> </div>
 			</div>
+			
 			<div class="wthree_footer_copy">
 				<p>© 2016 Grocery Store. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
 			</div>
@@ -532,5 +537,33 @@ $(document).ready(function(){
 	</script>
 	<!-- Custom script -->
 	<script src="js/category/loadItem.js"></script>
+	<script src="js/payment.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script>
+		function submitForm(form){
+        swal({
+            title: "Bạn chắc chắn muốn mua hàng?",
+            text: "Nhấn ok dể xác nhận",
+            icon: "warning",
+            buttons: true,
+			showCancelButton: true,
+			confirmButtonColor: '#32a852',
+        }).then(()=>{
+			swal({
+            title: "Bạn đã mua thành công",
+            text: "Nhấn ok dể xác nhận",
+            icon: "success",
+			confirmButtonColor: '#32a852',
+        	}).then((isOkay)=>{
+				if(isOkay){
+                form.submit();
+            }
+			});
+            
+        });
+        return false;
+    }
+	</script>
 </body>
 </html>
